@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:api_work/user/user.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<User> users = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,20 +26,20 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             final user = users[index];
             // final name = user['name']['first'];
-            final email = user.email;
+            final email = user.gender;
+            final genderColor =
+                user.gender == 'male' ? Colors.blue[300] : Colors.pink[100];
             // final imgUrl = user['picture']['thumbnail'];
+
             return ListTile(
               // leading: ClipRRect(
               //   borderRadius: BorderRadius.circular(100),
               //   child: Image.network(imgUrl),
               // ),
 
-              // leading: CircleAvatar(
-              //   child: Image.network(imgUrl),
-
-              //   // Text('${index + 1}'),
-              // ),
-              title: Text(email),
+              title: Text(user.name.first),
+              subtitle: Text(user.phone),
+              // tileColor: genderColor,
               // subtitle: Text(email),
             );
           }),
@@ -55,8 +57,23 @@ class _HomeScreenState extends State<HomeScreen> {
     final body = response.body;
 
     final json = jsonDecode(body);
+    final results = json['results'] as List<dynamic>;
+    final transformed = results.map((e) {
+      final name = UserName(
+        title: e['name']['title'],
+        first: e['name']['first'],
+        last: e['name']['last'],
+      );
+      return User(
+        gender: e['gender'],
+        cell: e['cell'],
+        email: e['email'],
+        phone: e['phone'],
+        name: name,
+      );
+    }).toList();
     setState(() {
-      users = json['results'];
+      users = transformed;
     });
     // print('userDetail fetched');
   }
