@@ -1,3 +1,5 @@
+import 'package:api_work/model/user_dob.dart';
+import 'package:api_work/model/user_location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:api_work/model/user.dart';
@@ -19,12 +21,21 @@ class UserApi {
         first: e['name']['first'],
         last: e['name']['last'],
       );
+      final date = e['dob']['date'];
+      final dob = UserDob(age: e['dob']['age'], date: DateTime.parse(date));
+      final location = UserLocation(
+          city: e['location']['city'],
+          state: e['location']['state'],
+          country: e['location']['country'],
+          postcode: e['location']['postcode'].toString());
       return User(
         gender: e['gender'],
         cell: e['cell'],
         email: e['email'],
         phone: e['phone'],
         name: name,
+        dob: dob,
+        location: location,
       );
     }).toList();
 

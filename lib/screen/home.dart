@@ -1,3 +1,4 @@
+import 'package:api_work/model/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:api_work/model/user.dart';
 import 'package:api_work/services/user_api.dart';
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // ),
 
               title: Text(user.fullName),
-              subtitle: Text(user.phone),
+              subtitle: Text(user.location.postcode),
               // tileColor: genderColor,
               // subtitle: Text(email),
             );
