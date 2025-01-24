@@ -9,4 +9,11 @@ class UserLocation {
     required this.country,
     required this.postcode,
   });
+  factory UserLocation.fromMap(Map<String, dynamic> json) {
+    return UserLocation(
+        city: json['city'],
+        state: json['state'],
+        country: json['country'],
+        postcode: json['postcode']);
+  }
 }

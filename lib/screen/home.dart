@@ -1,10 +1,10 @@
-import 'package:api_work/model/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:api_work/model/user.dart';
 import 'package:api_work/services/user_api.dart';
+// import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // ),
 
               title: Text(user.fullName),
-              subtitle: Text(user.location.postcode),
+              // subtitle: Text(user.location.postcode),
               // tileColor: genderColor,
               // subtitle: Text(email),
             );
