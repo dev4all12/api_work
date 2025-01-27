@@ -10,8 +10,9 @@ class UserPicture {
 
   factory UserPicture.fromMap(Map<String, dynamic> e) {
     return UserPicture(
-        large: e['picture']['large'],
-        medium: e['picture']['medium'],
-        thumbnail: e['picture']['thumnail']);
+      large: e['picture']['large'],
+      medium: e['picture']['medium'],
+      thumbnail: e['picture']['thumbnail'],
+    );
   }
 }
